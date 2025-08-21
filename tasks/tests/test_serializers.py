@@ -2,10 +2,20 @@ from tasks.serializers import TaskSerializer
 
 
 class TestTaskSerializer:
-    """Тестирование сериализатора Task"""
+    """
+    Тесты для сериализатора TaskSerializer.
+
+    Класс содержит тесты для проверки валидации данных,
+    преобразования объектов и обработки ошибок в сериализаторе.
+    """
 
     def test_serializer_valid_data(self):
-        """Тест валидных данных сериализатора"""
+        """
+        Тест валидации корректных данных сериализатором.
+
+        Проверяет, что сериализатор принимает и валидирует данные
+        с правильными значениями статуса и обязательных полей.
+        """
         data = {
             "title": "Сериализованная задача",
             "description": "Описание для сериализации",
@@ -17,7 +27,12 @@ class TestTaskSerializer:
         assert serializer.validated_data["title"] == data["title"]
 
     def test_serializer_missing_title(self):
-        """Тест отсутствия обязательного поля"""
+        """
+        Тест валидации при отсутствии обязательного поля title.
+
+        Проверяет, что сериализатор корректно определяет отсутствие
+        обязательного поля и возвращает соответствующую ошибку.
+        """
         data = {"status": "created"}
         serializer = TaskSerializer(data=data)
 
@@ -25,7 +40,12 @@ class TestTaskSerializer:
         assert "title" in serializer.errors
 
     def test_serializer_invalid_status(self):
-        """Тест невалидного статуса"""
+        """
+        Тест валидации недопустимого статуса задачи.
+
+        Проверяет, что сериализатор отклоняет недопустимые значения статуса
+        и возвращает понятное сообщение об ошибке.
+        """
         data = {"title": "Задача", "status": "invalid_status"}
         serializer = TaskSerializer(data=data)
 

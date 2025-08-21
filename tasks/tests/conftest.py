@@ -40,3 +40,8 @@ def multiple_tasks(db):
         )
         tasks.append(task)
     return tasks
+
+
+@pytest.fixture
+def fake_uuid():
+    return "12345678-1234-1234-1234-123456789012"

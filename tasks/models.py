@@ -4,6 +4,16 @@ from django.db import models
 
 
 class Task(models.Model):
+    """
+    Модель задачи для управления задачами в системе.
+
+    Attributes:
+        uuid (UUIDField): Уникальный идентификатор задачи (первичный ключ)
+        title (CharField): Название задачи (обязательное поле)
+        description (TextField): Описание задачи (опциональное)
+        status (CharField): Статус задачи с choices: created, underway, completed
+    """
+
     STATUS_CHOICES = [
         ("created", "создано"),
         ("underway", "в работе"),
@@ -24,6 +34,7 @@ class Task(models.Model):
     )
 
     def __str__(self):
+        """Строковое представление задачи."""
         return f"Задача {self.title}. Статус: {self.status}"
 
     class Meta:
